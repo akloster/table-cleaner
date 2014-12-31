@@ -1,0 +1,10 @@
+numpy
+pandas
+jinja2
+tornado
+pygments
+pyzmq
+git+https://github.com/ipython/ipython.git
+sphinx
+jsonschema
+mistune
