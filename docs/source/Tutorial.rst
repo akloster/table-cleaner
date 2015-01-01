@@ -777,12 +777,12 @@ for the notebook, like so:
     
     // copy some of Jupyter's stylesheets for better viewing on
     // readthedocs.org
-    .rendered_html td, .rendered_html th {
+    td, th {
     text-align: left;
     vertical-align: middle;
     padding: 4px;
     }
-    .rendered_html tr, .rendered_html th, .rendered_html td {
+     tr, th, td {
     border: 1px solid black;
     border-collapse: collapse;
     margin: 1em 2em;
