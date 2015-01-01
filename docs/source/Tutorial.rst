@@ -14,8 +14,6 @@ namespace cluttering on the one hand, and is still reasonably short.
     import pandas as pd
     from IPython import display
     import table_cleaner as tc
-    
-
 IPython.display provides us with the means to display Python objects in
 a "rich" way, especially useful for tables.
 
@@ -280,7 +278,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
       <tbody>
         <tr>
           <th>0</th>
-          <td>      y</td>
+          <td>   name</td>
           <td>  0</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -288,7 +286,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>0</th>
-          <td>      x</td>
+          <td>      y</td>
           <td>  1</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -296,7 +294,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>0</th>
-          <td>   name</td>
+          <td> active</td>
           <td>  2</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -304,7 +302,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>0</th>
-          <td>  email</td>
+          <td>      x</td>
           <td>  3</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -312,7 +310,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>0</th>
-          <td> active</td>
+          <td>  email</td>
           <td>  4</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -320,7 +318,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>1</th>
-          <td>      y</td>
+          <td>   name</td>
           <td>  5</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -328,7 +326,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>1</th>
-          <td>      x</td>
+          <td>      y</td>
           <td>  6</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -336,7 +334,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>1</th>
-          <td>   name</td>
+          <td> active</td>
           <td>  7</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -344,7 +342,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>1</th>
-          <td>  email</td>
+          <td>      x</td>
           <td>  8</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -352,7 +350,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>1</th>
-          <td> active</td>
+          <td>  email</td>
           <td>  9</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -360,15 +358,15 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>2</th>
-          <td>      y</td>
+          <td>   name</td>
           <td> 10</td>
-          <td>                               undefined verdict</td>
-          <td>                 undefined</td>
-          <td>  True</td>
+          <td> 'Wilhelm Alexander' has more than 10 characters</td>
+          <td>                  too long</td>
+          <td> False</td>
         </tr>
         <tr>
           <th>2</th>
-          <td>      x</td>
+          <td>      y</td>
           <td> 11</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -376,64 +374,72 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>2</th>
-          <td>   name</td>
-          <td> 12</td>
-          <td> 'Wilhelm Alexander' has more than 10 characters</td>
-          <td>                  too long</td>
-          <td> False</td>
-        </tr>
-        <tr>
-          <th>2</th>
-          <td>  email</td>
-          <td> 13</td>
-          <td>  E-Mail addresses must contain one @ character.</td>
-          <td>          email_without_at</td>
-          <td> False</td>
-        </tr>
-        <tr>
-          <th>2</th>
           <td> active</td>
-          <td> 14</td>
+          <td> 12</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
           <td>  True</td>
         </tr>
         <tr>
-          <th>3</th>
-          <td>      y</td>
-          <td> 15</td>
-          <td>          'hello' cannot be converted to float64</td>
-          <td>           invalid float64</td>
-          <td> False</td>
+          <th>2</th>
+          <td>      x</td>
+          <td> 13</td>
+          <td>                               undefined verdict</td>
+          <td>                 undefined</td>
+          <td>  True</td>
         </tr>
         <tr>
-          <th>3</th>
-          <td>      x</td>
-          <td> 16</td>
-          <td>            'hello' cannot be converted to int32</td>
-          <td>             invalid int32</td>
+          <th>2</th>
+          <td>  email</td>
+          <td> 14</td>
+          <td>  E-Mail addresses must contain one @ character.</td>
+          <td>          email_without_at</td>
           <td> False</td>
         </tr>
         <tr>
           <th>3</th>
           <td>   name</td>
-          <td> 17</td>
+          <td> 15</td>
           <td>                 '1' has fewer than 2 characters</td>
           <td>                 too short</td>
           <td> False</td>
         </tr>
         <tr>
           <th>3</th>
-          <td>  email</td>
-          <td> 18</td>
-          <td>  E-Mail addresses must contain one @ character.</td>
-          <td>          email_without_at</td>
+          <td>      y</td>
+          <td> 16</td>
+          <td>          'hello' cannot be converted to float64</td>
+          <td>           invalid float64</td>
           <td> False</td>
         </tr>
         <tr>
           <th>3</th>
           <td> active</td>
+          <td> 17</td>
+          <td>                               undefined verdict</td>
+          <td>                 undefined</td>
+          <td>  True</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>      x</td>
+          <td> 18</td>
+          <td>            'hello' cannot be converted to int32</td>
+          <td>             invalid int32</td>
+          <td> False</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>  email</td>
           <td> 19</td>
+          <td>  E-Mail addresses must contain one @ character.</td>
+          <td>          email_without_at</td>
+          <td> False</td>
+        </tr>
+        <tr>
+          <th>4</th>
+          <td>   name</td>
+          <td> 20</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
           <td>  True</td>
@@ -441,14 +447,6 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         <tr>
           <th>4</th>
           <td>      y</td>
-          <td> 20</td>
-          <td>                              -3 is lower than 0</td>
-          <td>             value too low</td>
-          <td> False</td>
-        </tr>
-        <tr>
-          <th>4</th>
-          <td>      x</td>
           <td> 21</td>
           <td>                              -3 is lower than 0</td>
           <td>             value too low</td>
@@ -456,7 +454,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>4</th>
-          <td>   name</td>
+          <td> active</td>
           <td> 22</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -464,15 +462,15 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>4</th>
-          <td>  email</td>
+          <td>      x</td>
           <td> 23</td>
-          <td>                               undefined verdict</td>
-          <td>                 undefined</td>
-          <td>  True</td>
+          <td>                              -3 is lower than 0</td>
+          <td>             value too low</td>
+          <td> False</td>
         </tr>
         <tr>
           <th>4</th>
-          <td> active</td>
+          <td>  email</td>
           <td> 24</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -480,15 +478,15 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>5</th>
-          <td>      y</td>
+          <td>   name</td>
           <td> 25</td>
-          <td>                            11 is higher than 10</td>
-          <td>            value too high</td>
-          <td> False</td>
+          <td>                               undefined verdict</td>
+          <td>                 undefined</td>
+          <td>  True</td>
         </tr>
         <tr>
           <th>5</th>
-          <td>      x</td>
+          <td>      y</td>
           <td> 26</td>
           <td>                            11 is higher than 10</td>
           <td>            value too high</td>
@@ -496,7 +494,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>5</th>
-          <td>   name</td>
+          <td> active</td>
           <td> 27</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -504,8 +502,16 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>5</th>
-          <td>  email</td>
+          <td>      x</td>
           <td> 28</td>
+          <td>                            11 is higher than 10</td>
+          <td>            value too high</td>
+          <td> False</td>
+        </tr>
+        <tr>
+          <th>5</th>
+          <td>  email</td>
+          <td> 29</td>
           <td> 'example .com' is not a valid email domain name</td>
           <td> email_domain_name_invalid</td>
           <td> False</td>
@@ -513,18 +519,10 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         <tr>
           <th>5</th>
           <td>  email</td>
-          <td> 29</td>
+          <td> 30</td>
           <td>         'andy k' is not a valid email user name</td>
           <td>   email_user_name_invalid</td>
           <td> False</td>
-        </tr>
-        <tr>
-          <th>5</th>
-          <td> active</td>
-          <td> 30</td>
-          <td>                               undefined verdict</td>
-          <td>                 undefined</td>
-          <td>  True</td>
         </tr>
       </tbody>
     </table>
@@ -564,7 +562,7 @@ Let's filter the verdicts by validity:
         <tr>
           <th>2</th>
           <td>  name</td>
-          <td> 12</td>
+          <td> 10</td>
           <td> 'Wilhelm Alexander' has more than 10 characters</td>
           <td>                  too long</td>
           <td> False</td>
@@ -572,15 +570,23 @@ Let's filter the verdicts by validity:
         <tr>
           <th>2</th>
           <td> email</td>
-          <td> 13</td>
+          <td> 14</td>
           <td>  E-Mail addresses must contain one @ character.</td>
           <td>          email_without_at</td>
           <td> False</td>
         </tr>
         <tr>
           <th>3</th>
-          <td>     y</td>
+          <td>  name</td>
           <td> 15</td>
+          <td>                 '1' has fewer than 2 characters</td>
+          <td>                 too short</td>
+          <td> False</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>     y</td>
+          <td> 16</td>
           <td>          'hello' cannot be converted to float64</td>
           <td>           invalid float64</td>
           <td> False</td>
@@ -588,23 +594,15 @@ Let's filter the verdicts by validity:
         <tr>
           <th>3</th>
           <td>     x</td>
-          <td> 16</td>
+          <td> 18</td>
           <td>            'hello' cannot be converted to int32</td>
           <td>             invalid int32</td>
           <td> False</td>
         </tr>
         <tr>
           <th>3</th>
-          <td>  name</td>
-          <td> 17</td>
-          <td>                 '1' has fewer than 2 characters</td>
-          <td>                 too short</td>
-          <td> False</td>
-        </tr>
-        <tr>
-          <th>3</th>
           <td> email</td>
-          <td> 18</td>
+          <td> 19</td>
           <td>  E-Mail addresses must contain one @ character.</td>
           <td>          email_without_at</td>
           <td> False</td>
@@ -612,7 +610,7 @@ Let's filter the verdicts by validity:
         <tr>
           <th>4</th>
           <td>     y</td>
-          <td> 20</td>
+          <td> 21</td>
           <td>                              -3 is lower than 0</td>
           <td>             value too low</td>
           <td> False</td>
@@ -620,7 +618,7 @@ Let's filter the verdicts by validity:
         <tr>
           <th>4</th>
           <td>     x</td>
-          <td> 21</td>
+          <td> 23</td>
           <td>                              -3 is lower than 0</td>
           <td>             value too low</td>
           <td> False</td>
@@ -628,14 +626,6 @@ Let's filter the verdicts by validity:
         <tr>
           <th>5</th>
           <td>     y</td>
-          <td> 25</td>
-          <td>                            11 is higher than 10</td>
-          <td>            value too high</td>
-          <td> False</td>
-        </tr>
-        <tr>
-          <th>5</th>
-          <td>     x</td>
           <td> 26</td>
           <td>                            11 is higher than 10</td>
           <td>            value too high</td>
@@ -643,8 +633,16 @@ Let's filter the verdicts by validity:
         </tr>
         <tr>
           <th>5</th>
-          <td> email</td>
+          <td>     x</td>
           <td> 28</td>
+          <td>                            11 is higher than 10</td>
+          <td>            value too high</td>
+          <td> False</td>
+        </tr>
+        <tr>
+          <th>5</th>
+          <td> email</td>
+          <td> 29</td>
           <td> 'example .com' is not a valid email domain name</td>
           <td> email_domain_name_invalid</td>
           <td> False</td>
@@ -652,7 +650,7 @@ Let's filter the verdicts by validity:
         <tr>
           <th>5</th>
           <td> email</td>
-          <td> 29</td>
+          <td> 30</td>
           <td>         'andy k' is not a valid email user name</td>
           <td>   email_user_name_invalid</td>
           <td> False</td>
@@ -749,3 +747,101 @@ errors present in the data.
 
 The framework laid out in this project aims to provide this capability.
 It's still in its infancy, and the API may well be changed.
+
+Markup Frames
+-------------
+
+Let's bring some color into our tables. First, define some CSS styles
+for the notebook, like so:
+
+.. code:: python
+
+    %%html
+    <style>
+    .tc-cell-invalid {
+        background-color: #ff8080
+    }
+    .tc-highlight {
+        color: red;
+        font-weight: bold;
+        margin: 3px solid black;
+        background-color: #b0b0b0;
+    }
+    
+    .tc-green {
+        background-color: #80ff80
+    }
+    .tc-blue {
+        background-color: #8080ff;
+    }
+    
+    </style>
+
+
+.. raw:: html
+
+    <style>
+    .tc-cell-invalid {
+        background-color: #ff8080
+    }
+    .tc-highlight {
+        color: red;
+        font-weight: bold;
+        margin: 3px solid black;
+        background-color: #b0b0b0;
+    }
+    
+    .tc-green {
+        background-color: #80ff80
+    }
+    .tc-blue {
+        background-color: #8080ff;
+    }
+    
+    </style>
+
+
+The MarkupFrame class is subclassed from Pandas' DataFrame class and is
+used to manipulate and render cell-specific markup. It behaves almost
+exactly the same as a DataFrame.
+
+It can be created from a validation like this:
+
+.. code:: python
+
+    mdf = tc.MarkupFrame.from_validation(initial_df, verdicts)
+    mdf
+
+
+
+.. raw:: html
+
+    <div style="max-height:1000px;max-width:1500px;overflow:auto;">
+    <table class="markup-table"><thead><th></th><th>active</th><th>email</th><th>name</th><th>x</th><th>y</th></thead><tbody><tr><th>0</th><td>Y</td><td>alice@example.com</td><td>Alice</td><td>0</td><td>0.2</td></tr><tr><th>1</th><td>None</td><td>bob@example.com</td><td>Bob</td><td>3.2</td><td>3.2</td></tr><tr><th>2</th><td>T</td><td class="tc-cell-invalid">blub</td><td class="tc-cell-invalid">Wilhelm Alexander</td><td>5</td><td>1.3</td></tr><tr><th>3</th><td>false</td><td class="tc-cell-invalid">4</td><td class="tc-cell-invalid">1</td><td class="tc-cell-invalid">hello</td><td class="tc-cell-invalid">hello</td></tr><tr><th>4</th><td>no</td><td>mary@example.com</td><td>Mary</td><td class="tc-cell-invalid">-3</td><td class="tc-cell-invalid">-3.0</td></tr><tr><th>5</th><td>T</td><td class="tc-cell-invalid tc-cell-invalid">andy k@example .com</td><td>Andy</td><td class="tc-cell-invalid">11</td><td class="tc-cell-invalid">11.0</td></tr></tbody></table>
+    </div>
+
+
+
+Note that we put in the initial\_df table, because the verdicts always
+relate to the original dataframe, not the output, which has possibly
+been altered and shortened during the validation process.
+
+Now watch this:
+
+.. code:: python
+
+    mdf.x[1] += "tc-highlight"
+    mdf.y += "tc-green"
+    mdf.ix[0, :] += "tc-blue"
+    mdf
+
+
+
+
+.. raw:: html
+
+    <div style="max-height:1000px;max-width:1500px;overflow:auto;">
+    <table class="markup-table"><thead><th></th><th>active</th><th>email</th><th>name</th><th>x</th><th>y</th></thead><tbody><tr><th>0</th><td class="tc-blue">Y</td><td class="tc-blue">alice@example.com</td><td class="tc-blue">Alice</td><td class="tc-blue">0</td><td class="tc-green tc-blue">0.2</td></tr><tr><th>1</th><td>None</td><td>bob@example.com</td><td>Bob</td><td class="tc-highlight">3.2</td><td class="tc-green">3.2</td></tr><tr><th>2</th><td>T</td><td class="tc-cell-invalid">blub</td><td class="tc-cell-invalid">Wilhelm Alexander</td><td>5</td><td class="tc-green">1.3</td></tr><tr><th>3</th><td>false</td><td class="tc-cell-invalid">4</td><td class="tc-cell-invalid">1</td><td class="tc-cell-invalid">hello</td><td class="tc-cell-invalid tc-green">hello</td></tr><tr><th>4</th><td>no</td><td>mary@example.com</td><td>Mary</td><td class="tc-cell-invalid">-3</td><td class="tc-cell-invalid tc-green">-3.0</td></tr><tr><th>5</th><td>T</td><td class="tc-cell-invalid tc-cell-invalid">andy k@example .com</td><td>Andy</td><td class="tc-cell-invalid">11</td><td class="tc-cell-invalid tc-green">11.0</td></tr></tbody></table>
+    </div>
+
+
