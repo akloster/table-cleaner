@@ -30,14 +30,14 @@ class TableCleaner(object):
                     verdict_index.append(index)
                     value = verdict.value
                     valid &= verdict.valid
+                out_row[key] = value
                 if not valid:
                     continue
                 keys.append(key)
 
-                out_row[key] = value
             for key in set(dataframe.columns.get_values())-set(keys):
                 out_row[key] = row[key]
-            if valid and delete:
+            if valid or not delete:
                 output_rows.append(out_row)
         verdicts = pd.DataFrame(verdict_rows, index=verdict_index)
         return pd.DataFrame(output_rows), verdicts

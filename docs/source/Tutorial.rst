@@ -11,6 +11,7 @@ namespace cluttering on the one hand, and is still reasonably short.
 
 .. code:: python
 
+    import numpy as np
     import pandas as pd
     from IPython import display
     import table_cleaner as tc
@@ -286,7 +287,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>0</th>
-          <td>      y</td>
+          <td>      x</td>
           <td>  1</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -302,7 +303,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>0</th>
-          <td>      x</td>
+          <td>      y</td>
           <td>  3</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -326,7 +327,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>1</th>
-          <td>      y</td>
+          <td>      x</td>
           <td>  6</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -342,7 +343,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>1</th>
-          <td>      x</td>
+          <td>      y</td>
           <td>  8</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -366,7 +367,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>2</th>
-          <td>      y</td>
+          <td>      x</td>
           <td> 11</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -382,7 +383,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>2</th>
-          <td>      x</td>
+          <td>      y</td>
           <td> 13</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -406,10 +407,10 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>3</th>
-          <td>      y</td>
+          <td>      x</td>
           <td> 16</td>
-          <td>          'hello' cannot be converted to float64</td>
-          <td>           invalid float64</td>
+          <td>            'hello' cannot be converted to int32</td>
+          <td>             invalid int32</td>
           <td> False</td>
         </tr>
         <tr>
@@ -422,10 +423,10 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>3</th>
-          <td>      x</td>
+          <td>      y</td>
           <td> 18</td>
-          <td>            'hello' cannot be converted to int32</td>
-          <td>             invalid int32</td>
+          <td>          'hello' cannot be converted to float64</td>
+          <td>           invalid float64</td>
           <td> False</td>
         </tr>
         <tr>
@@ -446,7 +447,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>4</th>
-          <td>      y</td>
+          <td>      x</td>
           <td> 21</td>
           <td>                              -3 is lower than 0</td>
           <td>             value too low</td>
@@ -462,7 +463,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>4</th>
-          <td>      x</td>
+          <td>      y</td>
           <td> 23</td>
           <td>                              -3 is lower than 0</td>
           <td>             value too low</td>
@@ -486,7 +487,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>5</th>
-          <td>      y</td>
+          <td>      x</td>
           <td> 26</td>
           <td>                            11 is higher than 10</td>
           <td>            value too high</td>
@@ -502,7 +503,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>5</th>
-          <td>      x</td>
+          <td>      y</td>
           <td> 28</td>
           <td>                            11 is higher than 10</td>
           <td>            value too high</td>
@@ -585,18 +586,18 @@ Let's filter the verdicts by validity:
         </tr>
         <tr>
           <th>3</th>
-          <td>     y</td>
+          <td>     x</td>
           <td> 16</td>
-          <td>          'hello' cannot be converted to float64</td>
-          <td>           invalid float64</td>
+          <td>            'hello' cannot be converted to int32</td>
+          <td>             invalid int32</td>
           <td> False</td>
         </tr>
         <tr>
           <th>3</th>
-          <td>     x</td>
+          <td>     y</td>
           <td> 18</td>
-          <td>            'hello' cannot be converted to int32</td>
-          <td>             invalid int32</td>
+          <td>          'hello' cannot be converted to float64</td>
+          <td>           invalid float64</td>
           <td> False</td>
         </tr>
         <tr>
@@ -609,7 +610,7 @@ Let's filter the verdicts by validity:
         </tr>
         <tr>
           <th>4</th>
-          <td>     y</td>
+          <td>     x</td>
           <td> 21</td>
           <td>                              -3 is lower than 0</td>
           <td>             value too low</td>
@@ -617,7 +618,7 @@ Let's filter the verdicts by validity:
         </tr>
         <tr>
           <th>4</th>
-          <td>     x</td>
+          <td>     y</td>
           <td> 23</td>
           <td>                              -3 is lower than 0</td>
           <td>             value too low</td>
@@ -625,7 +626,7 @@ Let's filter the verdicts by validity:
         </tr>
         <tr>
           <th>5</th>
-          <td>     y</td>
+          <td>     x</td>
           <td> 26</td>
           <td>                            11 is higher than 10</td>
           <td>            value too high</td>
@@ -633,7 +634,7 @@ Let's filter the verdicts by validity:
         </tr>
         <tr>
           <th>5</th>
-          <td>     x</td>
+          <td>     y</td>
           <td> 28</td>
           <td>                            11 is higher than 10</td>
           <td>            value too high</td>
@@ -774,19 +775,6 @@ for the notebook, like so:
     .tc-blue {
         background-color: #8080ff;
     }
-    
-    // copy some of Jupyter's stylesheets for better viewing on
-    // readthedocs.org
-    td, th {
-    text-align: left;
-    vertical-align: middle;
-    padding: 4px;
-    }
-     tr, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    margin: 1em 2em;
-    }
     </style>
 
 
@@ -808,19 +796,6 @@ for the notebook, like so:
     }
     .tc-blue {
         background-color: #8080ff;
-    }
-    
-    // copy some of Jupyter's stylesheets for better viewing on
-    // readthedocs.org
-    .rendered_html td, .rendered_html th {
-    text-align: left;
-    vertical-align: middle;
-    padding: 4px;
-    }
-    .rendered_html tr, .rendered_html th, .rendered_html td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    margin: 1em 2em;
     }
     </style>
 
@@ -866,6 +841,287 @@ Now watch this:
 
     <div style="max-height:1000px;max-width:1500px;overflow:auto;">
     <table class="markup-table"><thead><th></th><th>active</th><th>email</th><th>name</th><th>x</th><th>y</th></thead><tbody><tr><th>0</th><td class="tc-blue">Y</td><td class="tc-blue">alice@example.com</td><td class="tc-blue">Alice</td><td class="tc-blue">0</td><td class="tc-green tc-blue">0.2</td></tr><tr><th>1</th><td>None</td><td>bob@example.com</td><td>Bob</td><td class="tc-highlight">3.2</td><td class="tc-green">3.2</td></tr><tr><th>2</th><td>T</td><td class="tc-cell-invalid">blub</td><td class="tc-cell-invalid">Wilhelm Alexander</td><td>5</td><td class="tc-green">1.3</td></tr><tr><th>3</th><td>false</td><td class="tc-cell-invalid">4</td><td class="tc-cell-invalid">1</td><td class="tc-cell-invalid">hello</td><td class="tc-cell-invalid tc-green">hello</td></tr><tr><th>4</th><td>no</td><td>mary@example.com</td><td>Mary</td><td class="tc-cell-invalid">-3</td><td class="tc-cell-invalid tc-green">-3.0</td></tr><tr><th>5</th><td>T</td><td class="tc-cell-invalid tc-cell-invalid">andy k@example .com</td><td>Andy</td><td class="tc-cell-invalid">11</td><td class="tc-cell-invalid tc-green">11.0</td></tr></tbody></table>
+    </div>
+
+
+
+Booleans
+--------
+
+**The trouble with Booleans**
+
+Boolean values are either True or False. In Pandas, and data science in
+general, things are a bit more tricky. There is a third state, which
+Pandas would refer to as a missing value. Numpy's Bool dtype does not
+support missing Values though.
+
+.. code:: python
+
+    np.bool(None)
+
+
+
+.. parsed-literal::
+
+    False
+
+
+
+What's happening there is that many Python objects have a way of being
+interpreted as either True or False. An empty list, empty strings, and
+None, are all considered false, for example.
+
+Now, let's try that in Pandas:
+
+.. code:: python
+
+    bools = pd.Series([True, False, None, np.NaN])
+    bools
+
+
+
+.. parsed-literal::
+
+    0     True
+    1    False
+    2     None
+    3      NaN
+    dtype: object
+
+
+
+The dtype is not "bool". Instead Pandas refers to the individual Python
+object, and thus dtype must be "object". We can make it bool, though:
+
+.. code:: python
+
+    bools.astype(bool)
+
+
+
+.. parsed-literal::
+
+    0     True
+    1    False
+    2    False
+    3     True
+    dtype: bool
+
+
+
+Notice how np.NaN, which is normally interpreted as a missing value, has
+been converted to True?
+
+If you try to index something with this sequence, this is what happens:
+
+.. code:: python
+
+    original = pd.Series(range(3))
+    original[bools]
+
+::
+
+
+    ---------------------------------------------------------------------------
+
+    ValueError                                Traceback (most recent call last)
+
+    <ipython-input-17-3d0782e602c7> in <module>()
+          1 original = pd.Series(range(3))
+    ----> 2 original[bools]
+    
+
+    /usr/local/lib/python3.4/site-packages/pandas/core/series.py in __getitem__(self, key)
+        544             key = list(key)
+        545 
+    --> 546         if _is_bool_indexer(key):
+        547             key = _check_bool_indexer(self.index, key)
+        548 
+
+
+    /usr/local/lib/python3.4/site-packages/pandas/core/common.py in _is_bool_indexer(key)
+       2058             if not lib.is_bool_array(key):
+       2059                 if isnull(key).any():
+    -> 2060                     raise ValueError('cannot index with vector containing '
+       2061                                      'NA / NaN values')
+       2062                 return False
+
+
+    ValueError: cannot index with vector containing NA / NaN values
+
+
+Let's take a look at how to bring some sanity into this issue with Table
+Cleaner. First, define a messy DataFrame, with columns that are
+identical:
+
+.. code:: python
+
+    bools = [True, False, None, np.NaN]
+    
+    bool_df = pd.DataFrame(dict(a=bools, b=bools, c=bools, d=bools))
+    bool_df
+
+
+
+.. raw:: html
+
+    <div style="max-height:1000px;max-width:1500px;overflow:auto;">
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>a</th>
+          <th>b</th>
+          <th>c</th>
+          <th>d</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>0</th>
+          <td>  True</td>
+          <td>  True</td>
+          <td>  True</td>
+          <td>  True</td>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td> False</td>
+          <td> False</td>
+          <td> False</td>
+          <td> False</td>
+        </tr>
+        <tr>
+          <th>2</th>
+          <td>  None</td>
+          <td>  None</td>
+          <td>  None</td>
+          <td>  None</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>   NaN</td>
+          <td>   NaN</td>
+          <td>   NaN</td>
+          <td>   NaN</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+
+
+Now create a cleaner which validates each column differently:
+
+.. code:: python
+
+    bool_cleaner = tc.TableCleaner(dict(a=tc.Bool(),
+                                   b=tc.Bool(true_values=[True], false_values=[False], allow_nan=False),
+                                   c=tc.Bool(true_values=[True], false_values=[False, None], allow_nan=False),
+                                   d=tc.Bool(true_values=[True], false_values=[False, np.nan],
+                                             nan_values=[None], allow_nan=False)))
+    
+    bool_output, bool_verdicts = bool_cleaner.validate(bool_df, delete=False)
+    tc.MarkupFrame.from_validation(bool_output, bool_verdicts)
+
+
+
+.. raw:: html
+
+    <div style="max-height:1000px;max-width:1500px;overflow:auto;">
+    <table class="markup-table"><thead><th></th><th>a</th><th>b</th><th>c</th><th>d</th></thead><tbody><tr><th>0</th><td>True</td><td>True</td><td>True</td><td>True</td></tr><tr><th>1</th><td>False</td><td>False</td><td>False</td><td>False</td></tr><tr><th>2</th><td>None</td><td class="tc-cell-invalid">None</td><td>None</td><td class="tc-cell-invalid">None</td></tr><tr><th>3</th><td>nan</td><td class="tc-cell-invalid">nan</td><td class="tc-cell-invalid">nan</td><td>False</td></tr></tbody></table>
+    </div>
+
+
+
+Note that I used "delete=False" to keep rows with invalid data, while
+still converting available values. Then this dataframe has the same
+shape as MarkupFrame.from\_validation expects. "allow\_nan" defaults to
+True and controls whether or not missing values are considered an error.
+
+.. code:: python
+
+    bool_verdicts[~bool_verdicts.valid]
+
+
+
+.. raw:: html
+
+    <div style="max-height:1000px;max-width:1500px;overflow:auto;">
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>column</th>
+          <th>counter</th>
+          <th>description</th>
+          <th>reason</th>
+          <th>valid</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>2</th>
+          <td> d</td>
+          <td>  8</td>
+          <td> None cannot be converted to True or False.</td>
+          <td> bool_nan_not_allowed</td>
+          <td> False</td>
+        </tr>
+        <tr>
+          <th>2</th>
+          <td> b</td>
+          <td> 10</td>
+          <td> None cannot be converted to True or False.</td>
+          <td> bool_nan_not_allowed</td>
+          <td> False</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td> b</td>
+          <td> 14</td>
+          <td>  nan cannot be converted to True or False.</td>
+          <td> bool_nan_not_allowed</td>
+          <td> False</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td> c</td>
+          <td> 15</td>
+          <td>  nan cannot be converted to True or False.</td>
+          <td> bool_nan_not_allowed</td>
+          <td> False</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+
+
+Tables coming from external sources, especially spreadsheet data is
+notorious for having all sorts of ways to indicate booleans or missing
+values. The Bool validator takes three arguments to handle these cases:
+true\_values, false\_values and nan\_values.
+
+.. code:: python
+
+    messy_bools_column =["T","t","on","yes", "No", "F"]
+    messy_bools = pd.DataFrame(dict(a=messy_bools_column, b=messy_bools_column))
+.. code:: python
+
+    bool_cleaner2 = tc.TableCleaner(dict(a=tc.Bool(),
+                                   b=tc.Bool(true_values=["T"], false_values=["F"], allow_nan=False),
+                                   ))
+    
+    bool_output2, bool_verdicts2 = bool_cleaner2.validate(messy_bools, delete=False)
+    tc.MarkupFrame.from_validation(bool_output2, bool_verdicts2)
+
+
+
+.. raw:: html
+
+    <div style="max-height:1000px;max-width:1500px;overflow:auto;">
+    <table class="markup-table"><thead><th></th><th>a</th><th>b</th></thead><tbody><tr><th>0</th><td>True</td><td>True</td></tr><tr><th>1</th><td>True</td><td class="tc-cell-invalid">t</td></tr><tr><th>2</th><td>True</td><td class="tc-cell-invalid">on</td></tr><tr><th>3</th><td>True</td><td class="tc-cell-invalid">yes</td></tr><tr><th>4</th><td>False</td><td class="tc-cell-invalid">No</td></tr><tr><th>5</th><td>False</td><td>False</td></tr></tbody></table>
     </div>
 
 

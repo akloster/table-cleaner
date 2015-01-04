@@ -80,19 +80,13 @@ class Bool(Validator):
             value = np.NaN
         else:
             # Not all types are valid inputs to np.isnan
-            try:
-                np.isnan(value)
-                value = np.NaN
-            except TypeError:
-                pass
-
-        if value is None:
             if self.default_to_nan:
                 value = np.NAN
+        if np.isnan(value):
             if not self.allow_nan:
-                yield Verdict(value, False, "bool nan not allowed",
-                              "%s cannot be converted to True or False." %\
-                                      (repr(obj),))
+                yield Verdict(value, False, "bool_nan_not_allowed",
+                                "%s cannot be converted to True or False." %\
+                                        (repr(obj),))
                 return
         yield Verdict(value, True)
 
