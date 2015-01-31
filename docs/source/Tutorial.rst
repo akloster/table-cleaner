@@ -287,7 +287,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>0</th>
-          <td>      x</td>
+          <td> active</td>
           <td>  1</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -295,7 +295,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>0</th>
-          <td> active</td>
+          <td>  email</td>
           <td>  2</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -311,7 +311,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>0</th>
-          <td>  email</td>
+          <td>      x</td>
           <td>  4</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -327,7 +327,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>1</th>
-          <td>      x</td>
+          <td> active</td>
           <td>  6</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -335,7 +335,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>1</th>
-          <td> active</td>
+          <td>  email</td>
           <td>  7</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -351,7 +351,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>1</th>
-          <td>  email</td>
+          <td>      x</td>
           <td>  9</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -367,7 +367,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>2</th>
-          <td>      x</td>
+          <td> active</td>
           <td> 11</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -375,11 +375,11 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>2</th>
-          <td> active</td>
+          <td>  email</td>
           <td> 12</td>
-          <td>                               undefined verdict</td>
-          <td>                 undefined</td>
-          <td>  True</td>
+          <td>  E-Mail addresses must contain one @ character.</td>
+          <td>          email_without_at</td>
+          <td> False</td>
         </tr>
         <tr>
           <th>2</th>
@@ -391,11 +391,11 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>2</th>
-          <td>  email</td>
+          <td>      x</td>
           <td> 14</td>
-          <td>  E-Mail addresses must contain one @ character.</td>
-          <td>          email_without_at</td>
-          <td> False</td>
+          <td>                               undefined verdict</td>
+          <td>                 undefined</td>
+          <td>  True</td>
         </tr>
         <tr>
           <th>3</th>
@@ -407,19 +407,19 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>3</th>
-          <td>      x</td>
-          <td> 16</td>
-          <td>            'hello' cannot be converted to int32</td>
-          <td>             invalid int32</td>
-          <td> False</td>
-        </tr>
-        <tr>
-          <th>3</th>
           <td> active</td>
-          <td> 17</td>
+          <td> 16</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
           <td>  True</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>  email</td>
+          <td> 17</td>
+          <td>  E-Mail addresses must contain one @ character.</td>
+          <td>          email_without_at</td>
+          <td> False</td>
         </tr>
         <tr>
           <th>3</th>
@@ -431,10 +431,10 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>3</th>
-          <td>  email</td>
+          <td>      x</td>
           <td> 19</td>
-          <td>  E-Mail addresses must contain one @ character.</td>
-          <td>          email_without_at</td>
+          <td>            'hello' cannot be converted to int32</td>
+          <td>             invalid int32</td>
           <td> False</td>
         </tr>
         <tr>
@@ -447,15 +447,15 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>4</th>
-          <td>      x</td>
+          <td> active</td>
           <td> 21</td>
-          <td>                              -3 is lower than 0</td>
-          <td>             value too low</td>
-          <td> False</td>
+          <td>                               undefined verdict</td>
+          <td>                 undefined</td>
+          <td>  True</td>
         </tr>
         <tr>
           <th>4</th>
-          <td> active</td>
+          <td>  email</td>
           <td> 22</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -471,11 +471,11 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>4</th>
-          <td>  email</td>
+          <td>      x</td>
           <td> 24</td>
-          <td>                               undefined verdict</td>
-          <td>                 undefined</td>
-          <td>  True</td>
+          <td>                              -3 is lower than 0</td>
+          <td>             value too low</td>
+          <td> False</td>
         </tr>
         <tr>
           <th>5</th>
@@ -487,32 +487,16 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>5</th>
-          <td>      x</td>
-          <td> 26</td>
-          <td>                            11 is higher than 10</td>
-          <td>            value too high</td>
-          <td> False</td>
-        </tr>
-        <tr>
-          <th>5</th>
           <td> active</td>
-          <td> 27</td>
+          <td> 26</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
           <td>  True</td>
         </tr>
         <tr>
           <th>5</th>
-          <td>      y</td>
-          <td> 28</td>
-          <td>                            11 is higher than 10</td>
-          <td>            value too high</td>
-          <td> False</td>
-        </tr>
-        <tr>
-          <th>5</th>
           <td>  email</td>
-          <td> 29</td>
+          <td> 27</td>
           <td> 'example .com' is not a valid email domain name</td>
           <td> email_domain_name_invalid</td>
           <td> False</td>
@@ -520,9 +504,25 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         <tr>
           <th>5</th>
           <td>  email</td>
-          <td> 30</td>
+          <td> 28</td>
           <td>         'andy k' is not a valid email user name</td>
           <td>   email_user_name_invalid</td>
+          <td> False</td>
+        </tr>
+        <tr>
+          <th>5</th>
+          <td>      y</td>
+          <td> 29</td>
+          <td>                            11 is higher than 10</td>
+          <td>            value too high</td>
+          <td> False</td>
+        </tr>
+        <tr>
+          <th>5</th>
+          <td>      x</td>
+          <td> 30</td>
+          <td>                            11 is higher than 10</td>
+          <td>            value too high</td>
           <td> False</td>
         </tr>
       </tbody>
@@ -571,7 +571,7 @@ Let's filter the verdicts by validity:
         <tr>
           <th>2</th>
           <td> email</td>
-          <td> 14</td>
+          <td> 12</td>
           <td>  E-Mail addresses must contain one @ character.</td>
           <td>          email_without_at</td>
           <td> False</td>
@@ -586,10 +586,10 @@ Let's filter the verdicts by validity:
         </tr>
         <tr>
           <th>3</th>
-          <td>     x</td>
-          <td> 16</td>
-          <td>            'hello' cannot be converted to int32</td>
-          <td>             invalid int32</td>
+          <td> email</td>
+          <td> 17</td>
+          <td>  E-Mail addresses must contain one @ character.</td>
+          <td>          email_without_at</td>
           <td> False</td>
         </tr>
         <tr>
@@ -602,18 +602,10 @@ Let's filter the verdicts by validity:
         </tr>
         <tr>
           <th>3</th>
-          <td> email</td>
-          <td> 19</td>
-          <td>  E-Mail addresses must contain one @ character.</td>
-          <td>          email_without_at</td>
-          <td> False</td>
-        </tr>
-        <tr>
-          <th>4</th>
           <td>     x</td>
-          <td> 21</td>
-          <td>                              -3 is lower than 0</td>
-          <td>             value too low</td>
+          <td> 19</td>
+          <td>            'hello' cannot be converted to int32</td>
+          <td>             invalid int32</td>
           <td> False</td>
         </tr>
         <tr>
@@ -625,25 +617,17 @@ Let's filter the verdicts by validity:
           <td> False</td>
         </tr>
         <tr>
-          <th>5</th>
+          <th>4</th>
           <td>     x</td>
-          <td> 26</td>
-          <td>                            11 is higher than 10</td>
-          <td>            value too high</td>
-          <td> False</td>
-        </tr>
-        <tr>
-          <th>5</th>
-          <td>     y</td>
-          <td> 28</td>
-          <td>                            11 is higher than 10</td>
-          <td>            value too high</td>
+          <td> 24</td>
+          <td>                              -3 is lower than 0</td>
+          <td>             value too low</td>
           <td> False</td>
         </tr>
         <tr>
           <th>5</th>
           <td> email</td>
-          <td> 29</td>
+          <td> 27</td>
           <td> 'example .com' is not a valid email domain name</td>
           <td> email_domain_name_invalid</td>
           <td> False</td>
@@ -651,9 +635,25 @@ Let's filter the verdicts by validity:
         <tr>
           <th>5</th>
           <td> email</td>
-          <td> 30</td>
+          <td> 28</td>
           <td>         'andy k' is not a valid email user name</td>
           <td>   email_user_name_invalid</td>
+          <td> False</td>
+        </tr>
+        <tr>
+          <th>5</th>
+          <td>     y</td>
+          <td> 29</td>
+          <td>                            11 is higher than 10</td>
+          <td>            value too high</td>
+          <td> False</td>
+        </tr>
+        <tr>
+          <th>5</th>
+          <td>     x</td>
+          <td> 30</td>
+          <td>                            11 is higher than 10</td>
+          <td>            value too high</td>
           <td> False</td>
         </tr>
       </tbody>
@@ -853,7 +853,7 @@ Booleans
 Boolean values are either True or False. In Pandas, and data science in
 general, things are a bit more tricky. There is a third state, which
 Pandas would refer to as a missing value. Numpy's Bool dtype does not
-support missing Values though.
+support missing values though.
 
 .. code:: python
 
@@ -1029,7 +1029,7 @@ Now create a cleaner which validates each column differently:
 .. raw:: html
 
     <div style="max-height:1000px;max-width:1500px;overflow:auto;">
-    <table class="markup-table"><thead><th></th><th>a</th><th>b</th><th>c</th><th>d</th></thead><tbody><tr><th>0</th><td>True</td><td>True</td><td>True</td><td>True</td></tr><tr><th>1</th><td>False</td><td>False</td><td>False</td><td>False</td></tr><tr><th>2</th><td>None</td><td class="tc-cell-invalid">None</td><td>None</td><td class="tc-cell-invalid">None</td></tr><tr><th>3</th><td>nan</td><td class="tc-cell-invalid">nan</td><td class="tc-cell-invalid">nan</td><td>False</td></tr></tbody></table>
+    <table class="markup-table"><thead><th></th><th>a</th><th>b</th><th>c</th><th>d</th></thead><tbody><tr><th>0</th><td>True</td><td>True</td><td>True</td><td>True</td></tr><tr><th>1</th><td>False</td><td>False</td><td>False</td><td>False</td></tr><tr><th>2</th><td>nan</td><td class="tc-cell-invalid">None</td><td>None</td><td class="tc-cell-invalid">None</td></tr><tr><th>3</th><td>nan</td><td class="tc-cell-invalid">nan</td><td class="tc-cell-invalid">nan</td><td>False</td></tr></tbody></table>
     </div>
 
 
@@ -1063,7 +1063,7 @@ True and controls whether or not missing values are considered an error.
         <tr>
           <th>2</th>
           <td> d</td>
-          <td>  8</td>
+          <td>  9</td>
           <td> None cannot be converted to True or False.</td>
           <td> bool_nan_not_allowed</td>
           <td> False</td>
@@ -1123,5 +1123,46 @@ true\_values, false\_values and nan\_values.
     <div style="max-height:1000px;max-width:1500px;overflow:auto;">
     <table class="markup-table"><thead><th></th><th>a</th><th>b</th></thead><tbody><tr><th>0</th><td>True</td><td>True</td></tr><tr><th>1</th><td>True</td><td class="tc-cell-invalid">t</td></tr><tr><th>2</th><td>True</td><td class="tc-cell-invalid">on</td></tr><tr><th>3</th><td>True</td><td class="tc-cell-invalid">yes</td></tr><tr><th>4</th><td>False</td><td class="tc-cell-invalid">No</td></tr><tr><th>5</th><td>False</td><td>False</td></tr></tbody></table>
     </div>
+
+
+
+Email validation
+================
+
+Email validation is a subject onto its own. Some frameworks offer
+validation by simple regular expressions, which sometimes isn't enough.
+Other libraries or programs go so far as to ask the corresponding mail
+server if it knows a particular address.
+
+In almost all generic usecases, you expect email names to adhere to a
+very specific form, meaning a username "at" a particular globally
+identifiable domain name. It is assumed that every computer in the world
+can resolve this domain name to the same physical server. Email
+standards and most eail servers however, don't require "fully qualified
+domain names" or even globally resolvable domains. "root@localhost" is a
+perfectly valid email address, but completely useless in most
+circumstances where you want to collect or use email addresses.
+
+TableCleaner's Email validator class is based on Django's validation
+method.
+
+.. code:: python
+
+    messy_emails =["alice@example.com", "bob@bob.com", "chris", "delta@localhost", "ernest@hemmingway@ernest.org", "fridolin@dev_server"]
+    email_df = pd.DataFrame(dict(email=messy_emails))
+    email_cleaner = tc.TableCleaner(dict(email=tc.Email()))
+    
+    email_output, email_verdicts = email_cleaner.validate(email_df, delete=False)
+    tc.MarkupFrame.from_validation(email_output, email_verdicts)
+
+
+
+.. raw:: html
+
+    <div style="max-height:1000px;max-width:1500px;overflow:auto;">
+    <table class="markup-table"><thead><th></th><th>email</th></thead><tbody><tr><th>0</th><td>alice@example.com</td></tr><tr><th>1</th><td>bob@bob.com</td></tr><tr><th>2</th><td class="tc-cell-invalid">chris</td></tr><tr><th>3</th><td>delta@localhost</td></tr><tr><th>4</th><td class="tc-cell-invalid tc-cell-invalid">ernest@hemmingway@ernest.org</td></tr><tr><th>5</th><td class="tc-cell-invalid">fridolin@dev_server</td></tr></tbody></table>
+    </div>
+
+
 
 
