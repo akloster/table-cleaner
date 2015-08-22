@@ -229,12 +229,16 @@ class TestString(unittest.TestCase):
             def __str__(self):
                 return "X"
         test_cases = ["Hello World", b"X", 1, 1.0, X()]
-        test_cases.append("Überforderung".encode("latin-1"))
         validator = String()
-        for email in test_cases:
-            verdicts = list(validator.validate(email))
+        for s in test_cases:
+            verdicts = list(validator.validate(s))
             self.assertTrue(verdicts[0].valid)
 
+        test_cases = [u"Überforderung".encode("latin-1")]
+        validator = String()
+        for s in test_cases:
+            verdicts = list(validator.validate(s))
+            self.assertFalse(verdicts[0].valid)
 
 if __name__ == '__main__':
     unittest.main()

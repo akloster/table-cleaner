@@ -16,20 +16,22 @@ class String(object):
         self.auto_detect_encoding = auto_detect_encoding
         self.encoding = encoding
 
+
     def validate(self, obj):
         try:
             value = force_text(obj)
-        except UnicodeEncodeError:
+        except UnicodeDecodeError:
+            value = ""
             yield Verdict(value, False, "decoding error", \
                           "'%s' cannot be decoded." % repr(value))
             return
         valid = True
         if (self.min_length>0) and (len(value) < self.min_length):
-                yield Verdict(value, False, "too short",
+            yield Verdict(value, False, "too short",
                                      "%s has fewer than %i characters" \
                                          % (repr(value), self.min_length))
-                valid = False
-        elif (self.max_length>0) and (len(value) > self.max_length):
+            valid = False
+        elif (self.max_length>0) and (len(value)>self.max_length):
             yield Verdict(value, False, "too long",
                                      "%s has more than %i characters" \
                                          % (repr(value), self.max_length))

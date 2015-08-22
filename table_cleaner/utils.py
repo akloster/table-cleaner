@@ -27,7 +27,7 @@ def force_text(s, encoding='utf-8', strings_only=False, errors='strict'):
         object (Python 2). Taken and modified from the Django source code. """
     if isinstance(s, six.text_type):
         return s
-    if not isinstance(s, six.string_types):
+    if not isinstance(s, six.string_types[0]):
         if six.PY3:
             if isinstance(s, bytes):
                 s = six.text_type(s, encoding, errors)
@@ -38,8 +38,5 @@ def force_text(s, encoding='utf-8', strings_only=False, errors='strict'):
         else:
             s = six.text_type(bytes(s), encoding, errors)
     else:
-        try:
-            s = s.decode(encoding, errors)
-        except UnicodeDecodeError:
-            pass
+        s = s.decode(encoding, errors)
     return s
