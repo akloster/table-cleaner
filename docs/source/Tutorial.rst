@@ -149,21 +149,20 @@ Let's define a cleaner:
 
 .. code:: python
 
-    cleaner = tc.TableCleaner({'name': tc.String(min_length=2, max_length=10),
-                               'email': tc.Email(),
-                               'x': tc.Int(min_value=0, max_value=10),
-                               'y': tc.Float64(min_value=0, max_value=10),
-                               'active': tc.Bool(),
-                                })
+    class MyCleaner(tc.Cleaner):
+        name = tc.String(min_length=2, max_length=10)
+        email = tc.Email()
+        x = tc.Int(min_value=0, max_value=10)
+        y = tc.Float64(min_value=0, max_value=10)
+        active = tc.Bool()
 
-The TableCleaner constructor takes a dictionary for its first argument.
-This dictionary contains a mapping from column names to validator
-instances.
+Cleaner classes contain fields with validators.
 
-The tc.String instance validates every input to a string. Because most
+The tc.String validator validates every input to a string. Because most
 Python objects have some way of being represented as a string, this will
-usually work. Additionally, it can impose restrictions on minimum and
-maximum string length.
+more often work than not. Pretty much the only failure reason is if the
+string is encoded wrongly. Additionally, it can impose restrictions on
+minimum and maximum string length.
 
 The tc.Int instance tries to turn the input into integer objects. This
 usually only works with numbers, or strings which look like integers.
@@ -173,14 +172,15 @@ The cleaner object can now validate the input dataframe like this:
 
 .. code:: python
 
-    output, verdicts = cleaner.validate(initial_df)
-The validate method returns a tuple containing the validated output
-dataframe and a dataframe containing the verdicts on the individual
-cells.
+    cleaner = MyCleaner(initial_df)
+Instantiating the cleaner class with an input dataframe creates a
+cleaner instance with data and verdicts. The validation happens inside
+the constructor.
 
 .. code:: python
 
-    display.display(output)
+    cleaner.cleaned
+
 
 
 .. raw:: html
@@ -219,6 +219,24 @@ cells.
     </div>
 
 
+
+.. code:: python
+
+    cleaner.cleaned.dtypes
+
+
+
+.. parsed-literal::
+
+    active     object
+    email      object
+    name       object
+    x           int64
+    y         float64
+    dtype: object
+
+
+
 The DataFrame only contains completely valid rows, because the default
 behavior is to delete any rows containing an error. See below on how to
 use missing values instead.
@@ -234,31 +252,15 @@ number of bytes per pointer.
 
 The "active" column is validated as a boolean field. There is a dtype
 called bool, but it only allows True and False. If there are missing
-values, the column reverts to "object".
-
-.. code:: python
-
-    output.dtypes
-
-
-
-.. parsed-literal::
-
-    active     object
-    email      object
-    name       object
-    x           int64
-    y         float64
-    dtype: object
-
-
+values, the column reverts to "object". To force the bool dtype, read
+the section about booleans below.
 
 So far, we have ensured only valid data is in the output table. But
 Table Cleaner can do more: The errors themselves can be treated as data:
 
 .. code:: python
 
-    verdicts
+    cleaner.verdicts
 
 
 
@@ -279,7 +281,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
       <tbody>
         <tr>
           <th>0</th>
-          <td>   name</td>
+          <td> active</td>
           <td>  0</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -287,7 +289,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>0</th>
-          <td> active</td>
+          <td>   name</td>
           <td>  1</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -303,7 +305,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>0</th>
-          <td>      y</td>
+          <td>      x</td>
           <td>  3</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -311,7 +313,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>0</th>
-          <td>      x</td>
+          <td>      y</td>
           <td>  4</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -319,7 +321,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>1</th>
-          <td>   name</td>
+          <td> active</td>
           <td>  5</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -327,7 +329,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>1</th>
-          <td> active</td>
+          <td>   name</td>
           <td>  6</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -343,7 +345,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>1</th>
-          <td>      y</td>
+          <td>      x</td>
           <td>  8</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -351,7 +353,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>1</th>
-          <td>      x</td>
+          <td>      y</td>
           <td>  9</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -359,19 +361,19 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>2</th>
-          <td>   name</td>
-          <td> 10</td>
-          <td> 'Wilhelm Alexander' has more than 10 characters</td>
-          <td>                  too long</td>
-          <td> False</td>
-        </tr>
-        <tr>
-          <th>2</th>
           <td> active</td>
-          <td> 11</td>
+          <td> 10</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
           <td>  True</td>
+        </tr>
+        <tr>
+          <th>2</th>
+          <td>   name</td>
+          <td> 11</td>
+          <td> 'Wilhelm Alexander' has more than 10 characters</td>
+          <td>                  too long</td>
+          <td> False</td>
         </tr>
         <tr>
           <th>2</th>
@@ -383,7 +385,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>2</th>
-          <td>      y</td>
+          <td>      x</td>
           <td> 13</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -391,7 +393,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>2</th>
-          <td>      x</td>
+          <td>      y</td>
           <td> 14</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -399,19 +401,19 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>3</th>
-          <td>   name</td>
-          <td> 15</td>
-          <td>                 '1' has fewer than 2 characters</td>
-          <td>                 too short</td>
-          <td> False</td>
-        </tr>
-        <tr>
-          <th>3</th>
           <td> active</td>
-          <td> 16</td>
+          <td> 15</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
           <td>  True</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>   name</td>
+          <td> 16</td>
+          <td>                 '1' has fewer than 2 characters</td>
+          <td>                 too short</td>
+          <td> False</td>
         </tr>
         <tr>
           <th>3</th>
@@ -423,23 +425,23 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>3</th>
-          <td>      y</td>
-          <td> 18</td>
-          <td>          'hello' cannot be converted to float64</td>
-          <td>           invalid float64</td>
-          <td> False</td>
-        </tr>
-        <tr>
-          <th>3</th>
           <td>      x</td>
-          <td> 19</td>
+          <td> 18</td>
           <td>            'hello' cannot be converted to int32</td>
           <td>             invalid int32</td>
           <td> False</td>
         </tr>
         <tr>
+          <th>3</th>
+          <td>      y</td>
+          <td> 19</td>
+          <td>          'hello' cannot be converted to float64</td>
+          <td>           invalid float64</td>
+          <td> False</td>
+        </tr>
+        <tr>
           <th>4</th>
-          <td>   name</td>
+          <td> active</td>
           <td> 20</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -447,7 +449,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>4</th>
-          <td> active</td>
+          <td>   name</td>
           <td> 21</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -463,7 +465,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>4</th>
-          <td>      y</td>
+          <td>      x</td>
           <td> 23</td>
           <td>                              -3 is lower than 0</td>
           <td>             value too low</td>
@@ -471,7 +473,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>4</th>
-          <td>      x</td>
+          <td>      y</td>
           <td> 24</td>
           <td>                              -3 is lower than 0</td>
           <td>             value too low</td>
@@ -479,7 +481,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>5</th>
-          <td>   name</td>
+          <td> active</td>
           <td> 25</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -487,7 +489,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>5</th>
-          <td> active</td>
+          <td>   name</td>
           <td> 26</td>
           <td>                               undefined verdict</td>
           <td>                 undefined</td>
@@ -511,7 +513,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>5</th>
-          <td>      y</td>
+          <td>      x</td>
           <td> 29</td>
           <td>                            11 is higher than 10</td>
           <td>            value too high</td>
@@ -519,7 +521,7 @@ Table Cleaner can do more: The errors themselves can be treated as data:
         </tr>
         <tr>
           <th>5</th>
-          <td>      x</td>
+          <td>      y</td>
           <td> 30</td>
           <td>                            11 is higher than 10</td>
           <td>            value too high</td>
@@ -541,7 +543,7 @@ Let's filter the verdicts by validity:
 
 .. code:: python
 
-    errors = verdicts[~verdicts.valid]
+    errors = cleaner.verdicts[~cleaner.verdicts.valid]
     display.display(errors)
 
 
@@ -563,7 +565,7 @@ Let's filter the verdicts by validity:
         <tr>
           <th>2</th>
           <td>  name</td>
-          <td> 10</td>
+          <td> 11</td>
           <td> 'Wilhelm Alexander' has more than 10 characters</td>
           <td>                  too long</td>
           <td> False</td>
@@ -579,7 +581,7 @@ Let's filter the verdicts by validity:
         <tr>
           <th>3</th>
           <td>  name</td>
-          <td> 15</td>
+          <td> 16</td>
           <td>                 '1' has fewer than 2 characters</td>
           <td>                 too short</td>
           <td> False</td>
@@ -594,23 +596,23 @@ Let's filter the verdicts by validity:
         </tr>
         <tr>
           <th>3</th>
-          <td>     y</td>
-          <td> 18</td>
-          <td>          'hello' cannot be converted to float64</td>
-          <td>           invalid float64</td>
-          <td> False</td>
-        </tr>
-        <tr>
-          <th>3</th>
           <td>     x</td>
-          <td> 19</td>
+          <td> 18</td>
           <td>            'hello' cannot be converted to int32</td>
           <td>             invalid int32</td>
           <td> False</td>
         </tr>
         <tr>
-          <th>4</th>
+          <th>3</th>
           <td>     y</td>
+          <td> 19</td>
+          <td>          'hello' cannot be converted to float64</td>
+          <td>           invalid float64</td>
+          <td> False</td>
+        </tr>
+        <tr>
+          <th>4</th>
+          <td>     x</td>
           <td> 23</td>
           <td>                              -3 is lower than 0</td>
           <td>             value too low</td>
@@ -618,7 +620,7 @@ Let's filter the verdicts by validity:
         </tr>
         <tr>
           <th>4</th>
-          <td>     x</td>
+          <td>     y</td>
           <td> 24</td>
           <td>                              -3 is lower than 0</td>
           <td>             value too low</td>
@@ -642,7 +644,7 @@ Let's filter the verdicts by validity:
         </tr>
         <tr>
           <th>5</th>
-          <td>     y</td>
+          <td>     x</td>
           <td> 29</td>
           <td>                            11 is higher than 10</td>
           <td>            value too high</td>
@@ -650,7 +652,7 @@ Let's filter the verdicts by validity:
         </tr>
         <tr>
           <th>5</th>
-          <td>     x</td>
+          <td>     y</td>
           <td> 30</td>
           <td>                            11 is higher than 10</td>
           <td>            value too high</td>
@@ -742,12 +744,9 @@ it, for example:
 
 
 This functionality is the main reason why Table Cleaner was initially
-written. In reproducible datascience, it is important not only to
+written. In reproducible data science, it is important not only to
 validate input data, but also be aware of, analyze and present the
 errors present in the data.
-
-The framework laid out in this project aims to provide this capability.
-It's still in its infancy, and the API may well be changed.
 
 Markup Frames
 -------------
@@ -804,11 +803,14 @@ The MarkupFrame class is subclassed from Pandas' DataFrame class and is
 used to manipulate and render cell-specific markup. It behaves almost
 exactly the same as a DataFrame.
 
+**Caution: This functionality will soon be completely rewritten to have
+a simpler and cleaner API.**
+
 It can be created from a validation like this:
 
 .. code:: python
 
-    mdf = tc.MarkupFrame.from_validation(initial_df, verdicts)
+    mdf = tc.MarkupFrame.from_validation(initial_df, cleaner.verdicts)
     mdf
 
 
@@ -1015,21 +1017,21 @@ Now create a cleaner which validates each column differently:
 
 .. code:: python
 
-    bool_cleaner = tc.TableCleaner(dict(a=tc.Bool(),
-                                   b=tc.Bool(true_values=[True], false_values=[False], allow_nan=False),
-                                   c=tc.Bool(true_values=[True], false_values=[False, None], allow_nan=False),
-                                   d=tc.Bool(true_values=[True], false_values=[False, np.nan],
-                                             nan_values=[None], allow_nan=False)))
+    class BoolCleaner(tc.Cleaner):
+        a = tc.Bool()
+        b = tc.Bool(true_values=[True], false_values=[False], allow_nan=False)
+        c = tc.Bool(true_values=[True], false_values=[False, None], allow_nan=False)
+        d = tc.Bool(true_values=[True], false_values=[False, np.nan], nan_values=[None], allow_nan=False)
     
-    bool_output, bool_verdicts = bool_cleaner.validate(bool_df, delete=False)
-    tc.MarkupFrame.from_validation(bool_output, bool_verdicts)
+    bool_cleaner = BoolCleaner(bool_df)
+    tc.MarkupFrame.from_validation(bool_df, bool_cleaner.verdicts)
 
 
 
 .. raw:: html
 
     <div style="max-height:1000px;max-width:1500px;overflow:auto;">
-    <table class="markup-table"><thead><th></th><th>a</th><th>b</th><th>c</th><th>d</th></thead><tbody><tr><th>0</th><td>True</td><td>True</td><td>True</td><td>True</td></tr><tr><th>1</th><td>False</td><td>False</td><td>False</td><td>False</td></tr><tr><th>2</th><td>nan</td><td class="tc-cell-invalid">None</td><td>None</td><td class="tc-cell-invalid">None</td></tr><tr><th>3</th><td>nan</td><td class="tc-cell-invalid">nan</td><td class="tc-cell-invalid">nan</td><td>False</td></tr></tbody></table>
+    <table class="markup-table"><thead><th></th><th>a</th><th>b</th><th>c</th><th>d</th></thead><tbody><tr><th>0</th><td>True</td><td>True</td><td>True</td><td>True</td></tr><tr><th>1</th><td>False</td><td>False</td><td>False</td><td>False</td></tr><tr><th>2</th><td>None</td><td class="tc-cell-invalid">None</td><td>None</td><td class="tc-cell-invalid">None</td></tr><tr><th>3</th><td>nan</td><td class="tc-cell-invalid">nan</td><td class="tc-cell-invalid">nan</td><td>nan</td></tr></tbody></table>
     </div>
 
 
@@ -1041,7 +1043,7 @@ True and controls whether or not missing values are considered an error.
 
 .. code:: python
 
-    bool_verdicts[~bool_verdicts.valid]
+    bool_cleaner.verdicts[~bool_cleaner.verdicts.valid]
 
 
 
@@ -1109,19 +1111,19 @@ true\_values, false\_values and nan\_values.
     messy_bools = pd.DataFrame(dict(a=messy_bools_column, b=messy_bools_column))
 .. code:: python
 
-    bool_cleaner2 = tc.TableCleaner(dict(a=tc.Bool(),
-                                   b=tc.Bool(true_values=["T"], false_values=["F"], allow_nan=False),
-                                   ))
+    class BoolCleaner2(tc.Cleaner):
+        a=tc.Bool()
+        b=tc.Bool(true_values=["T"], false_values=["F"], allow_nan=False)
     
-    bool_output2, bool_verdicts2 = bool_cleaner2.validate(messy_bools, delete=False)
-    tc.MarkupFrame.from_validation(bool_output2, bool_verdicts2)
+    bool_cleaner2 = BoolCleaner2(messy_bools)
+    tc.MarkupFrame.from_validation(messy_bools, bool_cleaner2.verdicts)
 
 
 
 .. raw:: html
 
     <div style="max-height:1000px;max-width:1500px;overflow:auto;">
-    <table class="markup-table"><thead><th></th><th>a</th><th>b</th></thead><tbody><tr><th>0</th><td>True</td><td>True</td></tr><tr><th>1</th><td>True</td><td class="tc-cell-invalid">t</td></tr><tr><th>2</th><td>True</td><td class="tc-cell-invalid">on</td></tr><tr><th>3</th><td>True</td><td class="tc-cell-invalid">yes</td></tr><tr><th>4</th><td>False</td><td class="tc-cell-invalid">No</td></tr><tr><th>5</th><td>False</td><td>False</td></tr></tbody></table>
+    <table class="markup-table"><thead><th></th><th>a</th><th>b</th></thead><tbody><tr><th>0</th><td>T</td><td>T</td></tr><tr><th>1</th><td>t</td><td class="tc-cell-invalid">t</td></tr><tr><th>2</th><td>on</td><td class="tc-cell-invalid">on</td></tr><tr><th>3</th><td>yes</td><td class="tc-cell-invalid">yes</td></tr><tr><th>4</th><td>No</td><td class="tc-cell-invalid">No</td></tr><tr><th>5</th><td>F</td><td>F</td></tr></tbody></table>
     </div>
 
 
@@ -1150,10 +1152,11 @@ method.
 
     messy_emails =["alice@example.com", "bob@bob.com", "chris", "delta@localhost", "ernest@hemmingway@ernest.org", "fridolin@dev_server"]
     email_df = pd.DataFrame(dict(email=messy_emails))
-    email_cleaner = tc.TableCleaner(dict(email=tc.Email()))
-    
-    email_output, email_verdicts = email_cleaner.validate(email_df, delete=False)
-    tc.MarkupFrame.from_validation(email_output, email_verdicts)
+    class EmailCleaner(tc.Cleaner):
+        email = tc.Email()
+        
+    email_cleaner = EmailCleaner(email_df)
+    tc.MarkupFrame.from_validation(email_df, email_cleaner.verdicts)
 
 
 
@@ -1162,7 +1165,5 @@ method.
     <div style="max-height:1000px;max-width:1500px;overflow:auto;">
     <table class="markup-table"><thead><th></th><th>email</th></thead><tbody><tr><th>0</th><td>alice@example.com</td></tr><tr><th>1</th><td>bob@bob.com</td></tr><tr><th>2</th><td class="tc-cell-invalid">chris</td></tr><tr><th>3</th><td>delta@localhost</td></tr><tr><th>4</th><td class="tc-cell-invalid tc-cell-invalid">ernest@hemmingway@ernest.org</td></tr><tr><th>5</th><td class="tc-cell-invalid">fridolin@dev_server</td></tr></tbody></table>
     </div>
-
-
 
 

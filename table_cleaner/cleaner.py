@@ -4,23 +4,34 @@ import six
 
 import pandas as pd
 
+class CleanerMetaclass(type):
+    def __init__(cls, name, bases, nmspc):
+        super(CleanerMetaclass, cls).__init__(name, bases, nmspc)
+        if not hasattr(cls, "_fields"):
+            cls._fields = {}
+        else:
+            cls._fields = cls._fields.copy()
 
-class TableCleaner(object):
-    def __init__(self, row_validators, column_validators=[]):
-        self.row_validators = row_validators
-        self.column_validators = column_validators
+        for k,v in nmspc.items():
+            if k in ['__init__','__qualname__', '__module__']:
+                continue
+            cls._fields[k] = v
 
-    def validate(self, dataframe, verdict_counter = 0, delete=True):
+
+class Cleaner(six.with_metaclass(CleanerMetaclass, object)):
+    def __init__(self, original, verdict_counter=0):
         output_rows = []
         verdict_rows = []
         verdict_index = []
-        for index, row in dataframe.iterrows():
+        self.original = original
+
+        for index, row in self.original.iterrows():
             out_row = dict()
             for key in row.index.get_values():
                 out_row[key] = None
             keys = []
             valid = True
-            for key, validator in six.iteritems(self.row_validators):
+            for key, validator in six.iteritems(self._fields):
                 for verdict in validator.validate(row[key]):
                     vrow = verdict.to_row()
                     vrow["column"] = key
@@ -35,9 +46,11 @@ class TableCleaner(object):
                     continue
                 keys.append(key)
 
-            for key in set(dataframe.columns.get_values())-set(keys):
+            for key in set(self.original.columns.get_values())-set(keys):
                 out_row[key] = row[key]
-            if valid or not delete:
+            if valid:
                 output_rows.append(out_row)
-        verdicts = pd.DataFrame(verdict_rows, index=verdict_index)
-        return pd.DataFrame(output_rows), verdicts
+        self.verdicts = pd.DataFrame(verdict_rows, index=verdict_index)
+        self.cleaned = pd.DataFrame(output_rows)
+
+

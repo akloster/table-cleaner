@@ -6,6 +6,7 @@ import pandas as pd
 
 from table_cleaner.table_markup import MarkupCell, MarkupFrame
 
+
 class TestCellMarkup(unittest.TestCase):
     def test_basic(self):
         c = MarkupCell()
