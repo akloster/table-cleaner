@@ -6,15 +6,23 @@ from .utils import force_text
 class String(object):
     """ Validates Strings. """
 
-    def __init__(self, min_length=0, max_length=-1):
+    def __init__(self, min_length=0, max_length=-1, encoding=None,
+                 auto_detect_encoding=True):
         if max_length>=0:
             if min_length>max_length:
                 raise ValueError("max_length must be greater than min_length")
         self.min_length = min_length
         self.max_length = max_length
+        self.auto_detect_encoding = auto_detect_encoding
+        self.encoding = encoding
 
     def validate(self, obj):
-        value = force_text(obj)
+        try:
+            value = force_text(obj)
+        except UnicodeEncodeError:
+            yield Verdict(value, False, "decoding error", \
+                          "'%s' cannot be decoded." % repr(value))
+            return
         valid = True
         if (self.min_length>0) and (len(value) < self.min_length):
                 yield Verdict(value, False, "too short",

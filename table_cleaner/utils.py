@@ -38,5 +38,8 @@ def force_text(s, encoding='utf-8', strings_only=False, errors='strict'):
         else:
             s = six.text_type(bytes(s), encoding, errors)
     else:
-        s = s.decode(encoding, errors)
+        try:
+            s = s.decode(encoding, errors)
+        except UnicodeDecodeError:
+            pass
     return s

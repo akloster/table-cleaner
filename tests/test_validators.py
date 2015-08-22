@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import six
 
@@ -220,6 +221,20 @@ class TestEmail(unittest.TestCase):
         for email in test_cases:
             verdicts = list(validator.validate(email))
             self.assertFalse(verdicts[0].valid)
+
+
+class TestString(unittest.TestCase):
+    def test_valid(self):
+        class X(object):
+            def __str__(self):
+                return "X"
+        test_cases = ["Hello World", b"X", 1, 1.0, X()]
+        test_cases.append("Überforderung".encode("latin-1"))
+        validator = String()
+        for email in test_cases:
+            verdicts = list(validator.validate(email))
+            self.assertTrue(verdicts[0].valid)
+
 
 if __name__ == '__main__':
     unittest.main()
